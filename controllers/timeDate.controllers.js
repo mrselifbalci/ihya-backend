@@ -33,7 +33,13 @@ const createTodayData = () => {
   const todayData = defaultData.map((entry) => ({
     hour: entry.hour, // Always use "HH:mm" format
     date: today,
-    names: entry.names.map((name) => ({ name, status: false })),
+    names: entry.names.map((name) => ({
+      name,
+      status:
+        entry.hour === "00:00" ||
+        entry.hour === "01:00" ||
+        entry.hour === "02:00", // Set status to true for 00:00 and 01:00
+    })),
   }));
 
   return todayData;
@@ -61,6 +67,7 @@ const createTodayEntries = async () => {
 
 // Get all data for a specific date
 exports.getDataByDate = async (req, res) => {
+  createTodayEntries();
   try {
     const { date } = req.params;
 
