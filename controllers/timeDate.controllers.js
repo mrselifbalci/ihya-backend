@@ -5,7 +5,7 @@ const createTodayData = () => {
 
   const defaultData = [
     { hour: "00:00", names: ["Elif", "R.Yasar"] },
-    { hour: "01:00", names: ["NURAY"] },
+    { hour: "01:00", names: ["NURAY", "Ebru"] },
     { hour: "02:00", names: ["Safiye Erbey"] },
     { hour: "03:00", names: ["ŞENGÜL"] },
     { hour: "04:00", names: ["ŞENGÜL"] },
@@ -35,10 +35,10 @@ const createTodayData = () => {
     date: today,
     names: entry.names.map((name) => ({
       name,
-      status:
-        entry.hour === "00:00" ||
-        entry.hour === "01:00" ||
-        entry.hour === "02:00", // Set status to true for 00:00 and 01:00
+      status: false,
+      // entry.hour === "00:00" ||
+      // entry.hour === "01:00" ||
+      // entry.hour === "02:00", // Set status to true for 00:00 and 01:00
     })),
   }));
 
