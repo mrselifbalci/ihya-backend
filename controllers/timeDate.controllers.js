@@ -67,7 +67,6 @@ const createTodayEntries = async () => {
 
 // Get all data for a specific date
 exports.getDataByDate = async (req, res) => {
-  createTodayEntries();
   try {
     const { date } = req.params;
 
