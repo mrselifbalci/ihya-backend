@@ -232,7 +232,7 @@ exports.initializeDay = async (req, res) => {
       { hour: "20:00", names: ["E.üçok"] },
       { hour: "21:00", names: ["Bahar", "Vuslat"] },
       { hour: "22:00", names: ["Hale"] },
-      { hour: "23:00", names: ["AyselA.Çevik"] },
+      { hour: "23:00", names: ["AyselA"] },
     ];
 
     const timeDateEntries = defaultData.map((entry) => ({
