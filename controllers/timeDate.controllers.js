@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { DateTime } = require("luxon");
 const TimeDateModel = require("../models/TimeDate.model");
 const createDataForDate = (date) => {
   const defaultData = [
@@ -251,7 +252,9 @@ exports.initializeDay = async (req, res) => {
 // Update a specific name's status for a specific hour
 exports.updateStatus = async (req, res) => {
   const { hour, name, status } = req.body;
-  const today = new Date().toISOString().split("T")[0];
+
+  // Get today's date in Turkey's timezone
+  const turkeyDay = DateTime.now().setZone("Asia/Istanbul").toISODate(); // Format: YYYY-MM-DD
 
   if (!hour || !name || typeof status !== "boolean") {
     return res.json({
@@ -261,7 +264,7 @@ exports.updateStatus = async (req, res) => {
   }
 
   try {
-    const entry = await TimeDateModel.findOne({ hour, date: today });
+    const entry = await TimeDateModel.findOne({ hour, date: turkeyDay }); // Use Turkey's date
     if (!entry) {
       return res.json({ status: 404, message: "Entry not found." });
     }
@@ -273,7 +276,7 @@ exports.updateStatus = async (req, res) => {
     await entry.save();
     res.json({ status: 200, message: "Status updated successfully.", entry });
   } catch (err) {
-    res.json({ status: 500, message: err });
+    res.json({ status: 500, message: err.message });
   }
 };
 
