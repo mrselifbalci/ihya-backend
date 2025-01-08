@@ -97,7 +97,7 @@ const createTomorrowData = () => {
     { hour: "07:00", names: ["inci", "AAyse"] },
     { hour: "08:00", names: ["Mine", "E.Mazma"] },
     { hour: "09:00", names: ["Htc Dem"] },
-    { hour: "10:00", names: ["E Aytan"] },
+    { hour: "10:00", names: ["E Aytan", "Asile"] },
     { hour: "11:00", names: ["Hayriye"] },
     { hour: "12:00", names: ["Mrym Glsm Esm"] },
     { hour: "13:00", names: ["aysegulg"] },
