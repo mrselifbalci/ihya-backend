@@ -10,6 +10,7 @@ var moviesRouter = require("./routes/movies.routes.js");
 var usersRouter = require("./routes/users.routes");
 var favoriteMoviesRouter = require("./routes/favoriteMovies.routes");
 var dateRouter = require("./routes/timeDateRoutes.routes");
+var surasRouter = require("./routes/suras.routes.js");
 
 //middlewares
 const verifyToken = require("./auth/verifyToken");
@@ -36,6 +37,7 @@ app.use("/", moviesRouter);
 app.use("/", usersRouter);
 app.use("/", favoriteMoviesRouter);
 app.use("/", dateRouter);
+app.use("/", surasRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
