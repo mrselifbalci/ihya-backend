@@ -4,7 +4,7 @@ const TimeDateModel = require("../models/TimeDate.model");
 const createDataForDate = (date) => {
   const defaultData = [
     { hour: "00:00", names: ["Elif", "R.Yasar"] },
-    { hour: "01:00", names: ["NURAY", "Ebru"] },
+    { hour: "01:00", names: ["NURAY", "Ebru", "Saliha"] },
     { hour: "02:00", names: ["Safiye Erbey"] },
     { hour: "03:00", names: ["ŞENGÜL"] },
     { hour: "04:00", names: ["ŞENGÜL"] },
@@ -44,7 +44,7 @@ const createTodayData = () => {
 
   const defaultData = [
     { hour: "00:00", names: ["Elif", "R.Yasar"] },
-    { hour: "01:00", names: ["NURAY", "Ebru"] },
+    { hour: "01:00", names: ["NURAY", "Ebru", "Saliha"] },
     { hour: "02:00", names: ["Safiye Erbey"] },
     { hour: "03:00", names: ["ŞENGÜL"] },
     { hour: "04:00", names: ["ŞENGÜL"] },
@@ -88,7 +88,7 @@ const createTomorrowData = () => {
 
   const defaultData = [
     { hour: "00:00", names: ["Elif", "R.Yasar"] },
-    { hour: "01:00", names: ["NURAY", "Ebru"] },
+    { hour: "01:00", names: ["NURAY", "Ebru", "Saliha"] },
     { hour: "02:00", names: ["Safiye Erbey"] },
     { hour: "03:00", names: ["ŞENGÜL"] },
     { hour: "04:00", names: ["ŞENGÜL"] },
@@ -211,7 +211,7 @@ exports.initializeDay = async (req, res) => {
 
     const defaultData = [
       { hour: "00:00", names: ["Elif", "R.Yasar"] },
-      { hour: "1:00", names: ["NURAY", "Ebru"] },
+      { hour: "1:00", names: ["NURAY", "Ebru", "Saliha"] },
       { hour: "2:00", names: ["Safiye Erbey"] },
       { hour: "3:00", names: ["ŞENGÜL"] },
       { hour: "4:00", names: ["ŞENGÜL"] },
