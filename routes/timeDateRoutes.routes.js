@@ -10,6 +10,6 @@ router.post("/date/initialize", timeDateController.initializeDay);
 router.get("/date/:date", timeDateController.getDataByDate);
 
 // Route to update a specific name's status for a specific hour
-router.patch("/date/update", timeDateController.updateStatus);
+router.put("/date/update/:id", timeDateController.updateStatus);
 
 module.exports = router;

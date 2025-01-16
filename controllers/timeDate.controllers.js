@@ -251,33 +251,12 @@ exports.initializeDay = async (req, res) => {
 
 // Update a specific name's status for a specific hour
 exports.updateStatus = async (req, res) => {
-  const { hour, name, status } = req.body;
-
-  // Get today's date in Turkey's timezone
-  const turkeyDay = DateTime.now().setZone("Asia/Istanbul").toISODate(); // Format: YYYY-MM-DD
-
-  if (!hour || !name || typeof status !== "boolean") {
-    return res.json({
-      status: 400,
-      message: "Hour, name, and status are required.",
-    });
-  }
-
-  try {
-    const entry = await TimeDateModel.findOne({ hour, date: turkeyDay }); // Use Turkey's date
-    if (!entry) {
-      return res.json({ status: 404, message: "Entry not found." });
-    }
-
-    entry.names = entry.names.map((n) =>
-      n.name === name ? { ...n, status } : n
-    );
-
-    await entry.save();
-    res.json({ status: 200, message: "Status updated successfully.", entry });
-  } catch (err) {
-    res.json({ status: 500, message: err.message });
-  }
+  await TimeDateModel.findByIdAndUpdate(
+    { _id: req.params.id },
+    { $set: req.body }
+  )
+    .then((data) => res.json({ message: "Successfully updated", data }))
+    .catch((err) => res.json({ message: err }));
 };
 
 // Delete all data for a specific date
