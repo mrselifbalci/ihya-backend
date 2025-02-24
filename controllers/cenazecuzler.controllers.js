@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
-const CuzlersModel = require("../models/Cuzlers.model");
+const CenazeCuzlersSchema = require("../models/CenazeCuzlers.model");
 
 exports.createPredefinedCuzlers = async (req, res) => {
   // const cuzlersToCreate = Array.from({ length: 30 }, (_, i) => ({
-  //   hatimNumber: 20,
+  //   hatimNumber: 10,
   //   cuzNumber: i + 1,
   //   personName: "",
   // }));
   // try {
-  //   await CuzlersModel.insertMany(cuzlersToCreate);
+  //   await CenazeCuzlersSchema.insertMany(cuzlersToCreate);
   //   res.status(200).json({ message: "30 Cuzlers created successfully" });
   // } catch (error) {
   //   console.error("Error inserting cuzlers:", error);
@@ -21,8 +21,8 @@ exports.getAllCities = async (req, res, next) => {
   if (isNaN(page) || isNaN(limit)) {
     return res.status(400).json({ message: "Page and limit must be numbers" });
   }
-  const total = await CuzlersModel.find().countDocuments();
-  await CuzlersModel.aggregate(
+  const total = await CenazeCuzlersSchema.find().countDocuments();
+  await CenazeCuzlersSchema.aggregate(
     [
       { $sort: { createdAt: -1 } },
       { $skip: (page - 1) * limit },
@@ -50,7 +50,7 @@ exports.getAllCities = async (req, res, next) => {
 };
 
 exports.create = async (req, res) => {
-  const newCity = await new CuzlersModel({
+  const newCity = await new CenazeCuzlersSchema({
     suraName: req.body.suraName,
     personName: req.body.suraName,
   });
@@ -73,7 +73,7 @@ exports.getSingleCity = async (req, res) => {
     return;
   }
 
-  await CuzlersModel.aggregate(
+  await CenazeCuzlersSchema.aggregate(
     [
       {
         $match: { _id: mongoose.Types.ObjectId(req.params.id) },
@@ -114,7 +114,7 @@ exports.updateCity = async (req, res) => {
   //   res.json({ message: "Invalid city id" });
   //   return;
   // }
-  await CuzlersModel.findByIdAndUpdate(
+  await CenazeCuzlersSchema.findByIdAndUpdate(
     { _id: req.params.id },
     { $set: req.body }
   )
@@ -127,7 +127,7 @@ exports.deleteCity = async (req, res) => {
     res.json({ message: "Invalid city id" });
     return;
   }
-  await CuzlersModel.findByIdAndDelete({ _id: req.params.id })
+  await CenazeCuzlersSchema.findByIdAndDelete({ _id: req.params.id })
     .then((data) => res.json(data))
     .catch((err) => res.json({ message: err }));
 };
