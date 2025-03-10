@@ -2,18 +2,18 @@ const mongoose = require("mongoose");
 const FetihsModel = require("../models/Fetihs.model");
 
 exports.createPredefinedFetihs = async (req, res) => {
-  const fetihsToCreate = Array.from({ length: 313 }, (_, i) => ({
-    hatimNumber: 1,
-    fetihNumber: i + 1,
-    personName: "",
-  }));
-  try {
-    await FetihsModel.insertMany(fetihsToCreate);
-    res.status(200).json({ message: "30 Cuzlers created successfully" });
-  } catch (error) {
-    console.error("Error inserting cuzlers:", error);
-    res.status(500).json({ message: "Error creating cuzlers", error });
-  }
+  // const fetihsToCreate = Array.from({ length: 313 }, (_, i) => ({
+  //   hatimNumber: 5,
+  //   fetihNumber: i + 1,
+  //   personName: "",
+  // }));
+  // try {
+  //   await FetihsModel.insertMany(fetihsToCreate);
+  //   res.status(200).json({ message: "30 Cuzlers created successfully" });
+  // } catch (error) {
+  //   console.error("Error inserting cuzlers:", error);
+  //   res.status(500).json({ message: "Error creating cuzlers", error });
+  // }
 };
 
 exports.getAllCities = async (req, res, next) => {
