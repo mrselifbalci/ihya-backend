@@ -1,19 +1,19 @@
 const mongoose = require("mongoose");
-const CuzlersModel = require("../models/Cuzlers.model");
+const FetihsModel = require("../models/Fetihs.model");
 
-exports.createPredefinedCuzlers = async (req, res) => {
-  // const cuzlersToCreate = Array.from({ length: 30 }, (_, i) => ({
-  //   hatimNumber: 50,
-  //   cuzNumber: i + 1,
-  //   personName: "",
-  // }));
-  // try {
-  //   await CuzlersModel.insertMany(cuzlersToCreate);
-  //   res.status(200).json({ message: "30 Cuzlers created successfully" });
-  // } catch (error) {
-  //   console.error("Error inserting cuzlers:", error);
-  //   res.status(500).json({ message: "Error creating cuzlers", error });
-  // }
+exports.createPredefinedFetihs = async (req, res) => {
+  const fetihsToCreate = Array.from({ length: 313 }, (_, i) => ({
+    hatimNumber: 1,
+    fetihNumber: i + 1,
+    personName: "",
+  }));
+  try {
+    await FetihsModel.insertMany(fetihsToCreate);
+    res.status(200).json({ message: "30 Cuzlers created successfully" });
+  } catch (error) {
+    console.error("Error inserting cuzlers:", error);
+    res.status(500).json({ message: "Error creating cuzlers", error });
+  }
 };
 
 exports.getAllCities = async (req, res, next) => {
@@ -21,15 +21,15 @@ exports.getAllCities = async (req, res, next) => {
   if (isNaN(page) || isNaN(limit)) {
     return res.status(400).json({ message: "Page and limit must be numbers" });
   }
-  const total = await CuzlersModel.find().countDocuments();
-  await CuzlersModel.aggregate(
+  const total = await FetihsModel.find().countDocuments();
+  await FetihsModel.aggregate(
     [
-      { $sort: { createdAt: -1 } },
+      { $sort: { fetihNumber: 1 } },
       { $skip: (page - 1) * limit },
       { $limit: limit * 1 },
       {
         $project: {
-          cuzNumber: true,
+          fetihNumber: true,
           personName: true,
           hatimNumber: true,
         },
@@ -50,7 +50,7 @@ exports.getAllCities = async (req, res, next) => {
 };
 
 exports.create = async (req, res) => {
-  const newCity = await new CuzlersModel({
+  const newCity = await new FetihsModel({
     suraName: req.body.suraName,
     personName: req.body.suraName,
   });
@@ -73,7 +73,7 @@ exports.getSingleCity = async (req, res) => {
     return;
   }
 
-  await CuzlersModel.aggregate(
+  await FetihsModel.aggregate(
     [
       {
         $match: { _id: mongoose.Types.ObjectId(req.params.id) },
@@ -114,7 +114,7 @@ exports.updateCity = async (req, res) => {
   //   res.json({ message: "Invalid city id" });
   //   return;
   // }
-  await CuzlersModel.findByIdAndUpdate(
+  await FetihsModel.findByIdAndUpdate(
     { _id: req.params.id },
     { $set: req.body }
   )
@@ -127,7 +127,7 @@ exports.deleteCity = async (req, res) => {
     res.json({ message: "Invalid city id" });
     return;
   }
-  await CuzlersModel.findByIdAndDelete({ _id: req.params.id })
+  await FetihsModel.findByIdAndDelete({ _id: req.params.id })
     .then((data) => res.json(data))
     .catch((err) => res.json({ message: err }));
 };
