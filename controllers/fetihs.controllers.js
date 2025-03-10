@@ -17,7 +17,7 @@ exports.createPredefinedFetihs = async (req, res) => {
 };
 
 exports.getAllCities = async (req, res, next) => {
-  const { page = 1, limit = 1000 } = req.query;
+  const { page = 1, limit = 100000 } = req.query;
   if (isNaN(page) || isNaN(limit)) {
     return res.status(400).json({ message: "Page and limit must be numbers" });
   }
