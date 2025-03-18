@@ -2,22 +2,22 @@ const mongoose = require("mongoose");
 const CuzlersModel = require("../models/Cuzlers.model");
 
 exports.createPredefinedCuzlers = async (req, res) => {
-  // const cuzlersToCreate = Array.from({ length: 30 }, (_, i) => ({
-  //   hatimNumber: 50,
-  //   cuzNumber: i + 1,
-  //   personName: "",
-  // }));
-  // try {
-  //   await CuzlersModel.insertMany(cuzlersToCreate);
-  //   res.status(200).json({ message: "30 Cuzlers created successfully" });
-  // } catch (error) {
-  //   console.error("Error inserting cuzlers:", error);
-  //   res.status(500).json({ message: "Error creating cuzlers", error });
-  // }
+  const cuzlersToCreate = Array.from({ length: 30 }, (_, i) => ({
+    hatimNumber: 90,
+    cuzNumber: i + 1,
+    personName: "",
+  }));
+  try {
+    await CuzlersModel.insertMany(cuzlersToCreate);
+    res.status(200).json({ message: "30 Cuzlers created successfully" });
+  } catch (error) {
+    console.error("Error inserting cuzlers:", error);
+    res.status(500).json({ message: "Error creating cuzlers", error });
+  }
 };
 
 exports.getAllCities = async (req, res, next) => {
-  const { page = 1, limit = 1000 } = req.query;
+  const { page = 1, limit = 100000 } = req.query;
   if (isNaN(page) || isNaN(limit)) {
     return res.status(400).json({ message: "Page and limit must be numbers" });
   }
@@ -130,4 +130,25 @@ exports.deleteCity = async (req, res) => {
   await CuzlersModel.findByIdAndDelete({ _id: req.params.id })
     .then((data) => res.json(data))
     .catch((err) => res.json({ message: err }));
+};
+
+exports.deleteByHatimNumber = async (req, res) => {
+  const { hatimNumber } = req.params;
+  console.log(hatimNumber);
+  if (!hatimNumber || isNaN(hatimNumber)) {
+    return res.status(400).json({ message: "Invalid hatimNumber" });
+  }
+
+  try {
+    const result = await CuzlersModel.deleteMany({
+      hatimNumber: Number(hatimNumber),
+    });
+
+    res.status(200).json({
+      message: `${result.deletedCount} Cuzlers deleted successfully`,
+    });
+  } catch (error) {
+    console.error("Error deleting Cuzlers:", error);
+    res.status(500).json({ message: "Error deleting Cuzlers", error });
+  }
 };
