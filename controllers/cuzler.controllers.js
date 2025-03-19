@@ -2,18 +2,18 @@ const mongoose = require("mongoose");
 const CuzlersModel = require("../models/Cuzlers.model");
 
 exports.createPredefinedCuzlers = async (req, res) => {
-  const cuzlersToCreate = Array.from({ length: 30 }, (_, i) => ({
-    hatimNumber: 90,
-    cuzNumber: i + 1,
-    personName: "",
-  }));
-  try {
-    await CuzlersModel.insertMany(cuzlersToCreate);
-    res.status(200).json({ message: "30 Cuzlers created successfully" });
-  } catch (error) {
-    console.error("Error inserting cuzlers:", error);
-    res.status(500).json({ message: "Error creating cuzlers", error });
-  }
+  // const cuzlersToCreate = Array.from({ length: 30 }, (_, i) => ({
+  //   hatimNumber: 90,
+  //   cuzNumber: i + 1,
+  //   personName: "",
+  // }));
+  // try {
+  //   await CuzlersModel.insertMany(cuzlersToCreate);
+  //   res.status(200).json({ message: "30 Cuzlers created successfully" });
+  // } catch (error) {
+  //   console.error("Error inserting cuzlers:", error);
+  //   res.status(500).json({ message: "Error creating cuzlers", error });
+  // }
 };
 
 exports.getAllCities = async (req, res, next) => {
@@ -114,6 +114,15 @@ exports.updateCity = async (req, res) => {
   //   res.json({ message: "Invalid city id" });
   //   return;
   // }
+  const city = await CuzlersModel.findById(req.params.id);
+  if (!city) {
+    return res.status(404).json({ message: "City not found" });
+  }
+
+  if (!req.body.isAdmin && city.personName && city.personName.trim() !== "") {
+    return res.json({ message: "exists" });
+  }
+
   await CuzlersModel.findByIdAndUpdate(
     { _id: req.params.id },
     { $set: req.body }
