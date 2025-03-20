@@ -2,14 +2,21 @@ const mongoose = require("mongoose");
 const CuzlersModel = require("../models/Cuzlers.model");
 
 exports.createPredefinedCuzlers = async (req, res) => {
-  // const cuzlersToCreate = Array.from({ length: 30 }, (_, i) => ({
-  //   hatimNumber: 90,
-  //   cuzNumber: i + 1,
-  //   personName: "",
-  // }));
+  // const hatimNumbers = [91, 92, 93, 94, 95, 96, 97, 98, 99, 100];
+  // const cuzlersToCreate = hatimNumbers.flatMap((hatimNumber) =>
+  //   Array.from({ length: 30 }, (_, i) => ({
+  //     hatimNumber,
+  //     cuzNumber: i + 1,
+  //     personName: "",
+  //   }))
+  // );
   // try {
   //   await CuzlersModel.insertMany(cuzlersToCreate);
-  //   res.status(200).json({ message: "30 Cuzlers created successfully" });
+  //   res
+  //     .status(200)
+  //     .json({
+  //       message: `${cuzlersToCreate.length} Cuzlers created successfully`,
+  //     });
   // } catch (error) {
   //   console.error("Error inserting cuzlers:", error);
   //   res.status(500).json({ message: "Error creating cuzlers", error });
