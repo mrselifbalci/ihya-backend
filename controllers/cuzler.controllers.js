@@ -20,7 +20,25 @@ exports.createPredefinedCuzlers = async (req, res) => {
     res.status(500).json({ message: "Error creating cuzlers", error });
   }
 };
-
+exports.createPredefinedCuzlersWithName = async (req, res) => {
+  const { hatimNumbers, personName } = req.body;
+  const cuzlersToCreate = hatimNumbers.flatMap((hatimNumber) =>
+    Array.from({ length: 30 }, (_, i) => ({
+      hatimNumber,
+      cuzNumber: i + 1,
+      personName: personName,
+    }))
+  );
+  try {
+    await CuzlersModel.insertMany(cuzlersToCreate);
+    res.status(200).json({
+      message: `${cuzlersToCreate.length} Cuzlers created successfully`,
+    });
+  } catch (error) {
+    console.error("Error inserting cuzlers:", error);
+    res.status(500).json({ message: "Error creating cuzlers", error });
+  }
+};
 exports.getAllCities = async (req, res, next) => {
   const { page = 1, limit = 100000 } = req.query;
   if (isNaN(page) || isNaN(limit)) {
