@@ -14,6 +14,7 @@ var surasRouter = require("./routes/suras.routes.js");
 var cuzlersRouter = require("./routes/cuzlers.routes.js");
 var cenazeCuzlersRouter = require("./routes/cenazecuzlers.routes.js");
 var fetihsRouter = require("./routes/fetihs.routes.js");
+var salavatRouter = require("./routes/salavatRoutes.js");
 //middlewares
 const verifyToken = require("./auth/verifyToken");
 // const isAdmin = require('./auth/isAdmin');
@@ -43,6 +44,7 @@ app.use("/", surasRouter);
 app.use("/", cuzlersRouter);
 app.use("/", cenazeCuzlersRouter);
 app.use("/", fetihsRouter);
+app.use("/", salavatRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
