@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const FetihsModel = require("../models/Fetihs.model");
+const YasinsModel = require("../models/Yasins.model");
 
 exports.createPredefinedFetihs = async (req, res) => {
   // const fetihsToCreate = Array.from({ length: 313 }, (_, i) => ({
@@ -8,8 +8,8 @@ exports.createPredefinedFetihs = async (req, res) => {
   //   personName: "",
   // }));
   // try {
-  //   await FetihsModel.insertMany(fetihsToCreate);
-  //   res.status(200).json({ message: "313 Fetihs created successfully" });
+  //   await YasinsModel.insertMany(fetihsToCreate);
+  //   res.status(200).json({ message: "313 Yasins created successfully" });
   // } catch (error) {
   //   console.error("Error inserting cuzlers:", error);
   //   res.status(500).json({ message: "Error creating cuzlers", error });
@@ -21,8 +21,8 @@ exports.getAllCities = async (req, res, next) => {
   if (isNaN(page) || isNaN(limit)) {
     return res.status(400).json({ message: "Page and limit must be numbers" });
   }
-  const total = await FetihsModel.find().countDocuments();
-  await FetihsModel.aggregate(
+  const total = await YasinsModel.find().countDocuments();
+  await YasinsModel.aggregate(
     [
       { $sort: { fetihNumber: 1 } },
       { $skip: (page - 1) * limit },
@@ -50,7 +50,7 @@ exports.getAllCities = async (req, res, next) => {
 };
 
 exports.create = async (req, res) => {
-  const newCity = await new FetihsModel({
+  const newCity = await new YasinsModel({
     suraName: req.body.suraName,
     personName: req.body.suraName,
   });
@@ -73,7 +73,7 @@ exports.getSingleCity = async (req, res) => {
     return;
   }
 
-  await FetihsModel.aggregate(
+  await YasinsModel.aggregate(
     [
       {
         $match: { _id: mongoose.Types.ObjectId(req.params.id) },
@@ -114,7 +114,7 @@ exports.updateCity = async (req, res) => {
   //   res.json({ message: "Invalid city id" });
   //   return;
   // }
-  await FetihsModel.findByIdAndUpdate(
+  await YasinsModel.findByIdAndUpdate(
     { _id: req.params.id },
     { $set: req.body }
   )
@@ -127,7 +127,7 @@ exports.deleteCity = async (req, res) => {
     res.json({ message: "Invalid city id" });
     return;
   }
-  await FetihsModel.findByIdAndDelete({ _id: req.params.id })
+  await YasinsModel.findByIdAndDelete({ _id: req.params.id })
     .then((data) => res.json(data))
     .catch((err) => res.json({ message: err }));
 };
